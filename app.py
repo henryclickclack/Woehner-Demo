@@ -41,7 +41,10 @@ def send_request_to_llm(document_type, name, date, detail1, detail2, detail3, de
 
 
 # Create the Gradio Blocks interface
-with gr.Blocks() as demo:
+with gr.Blocks(    theme=gr.themes.Soft(),
+    head='<link rel="icon" type="image/x-icon" href="https://d11wkw82a69pyn.cloudfront.net/style%20library/images/favicon.ico?rev=20231201095823"/> <style> font-family: Futura,Trebuchet MS,Arial,sans-serif !important; </style>',
+    css="#dlt_btn {background-color: #b30000} #send_btn {background-color: #006400} #refresh-button { max-width: 32px } footer div {visibility: hidden}  footer a {visibility: hidden} ", 
+    title="Huacaya AI Suite") as demo:
     gr.HTML(" <div style=\"display: flex; align-items: center; justify-content: center;margin-top:3%; margin-bottom:2%\"><img src='https://upload.wikimedia.org/wikipedia/commons/d/d4/Logo_w%C3%B6hner.svg' width='100' height='100'/><h1 style=\"font-size:80px;font-family: Arial Black;color:#004e59;margin-left: 20px;font-weight: 400; \">AI</h1></div>")
     with gr.Row():
         with gr.Column():
@@ -93,4 +96,4 @@ with gr.Blocks() as demo:
     generate_button.click(send_request_to_llm, inputs=[document_type, name, date, detail1, detail2, detail3, detail4], outputs=[system_prompt, output])
     clear_button.click(clear_fields)
 
-demo.launch()
+demo.launch(auth=("woehner","woehner"),server_port=5000,share=True,server_name="0.0.0.0",favicon_path="./favicon.ico")
