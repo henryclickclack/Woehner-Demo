@@ -95,6 +95,6 @@ with gr.Blocks(    theme=gr.themes.Soft(),
         return detail1, detail2, detail3, detail4, system_prompt
     document_type.change(fn=update_details, inputs=[document_type], outputs=[detail1, detail2, detail3, detail4, system_prompt])
     generate_button.click(send_request_to_llm, inputs=[document_type, name, date, detail1, detail2, detail3, detail4], outputs=[system_prompt, output])
-    clear_button.click(fn=clear_fields,output=[document_type,name,date,detail1, detail2, detail3, detail4, output,system_prompt])
+    clear_button.click(fn=clear_fields,outputs=[document_type,name,date,detail1, detail2, detail3, detail4, output,system_prompt])
 
-demo.launch(auth=("woehner","woehner"),server_port=5000,share=True,server_name="0.0.0.0",favicon_path="./favicon.ico")
+demo.launch(auth=("woehner","woehner"),server_port=5000,share=True,server_name="0.0.0.0")
