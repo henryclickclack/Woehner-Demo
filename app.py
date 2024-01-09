@@ -75,7 +75,7 @@ with gr.Blocks() as demo:
         output = gr.Textbox(label="Generated Text")
 
     # Function to update details based on document type
-    def update_details(document_type, _):
+    def update_details(document_type):
         if document_type not in SYSTEM_PROMPTS:  # Handle None or unexpected value
             document_type = "Zeugnisse"  # Defaul
         labels = {
