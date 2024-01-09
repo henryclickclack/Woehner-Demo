@@ -21,7 +21,7 @@ def send_request_to_llm(document_type, name, date, detail1, detail2, detail3, de
     
     # Preparing data for the POST request
     data = {
-    "model": "togethercomputer/llama-2-70b-chat",
+    "model": "mistralai/Mixtral-8x7B-Instruct-v0.1",
     "messages": [
             {
                 "role":"user",
