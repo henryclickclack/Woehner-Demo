@@ -76,7 +76,8 @@ with gr.Blocks(    theme=gr.themes.Soft(),
         detail3 = gr.Textbox(label="Detail 3")
         detail4 = gr.Textbox(label="Detail 4")
         output = gr.Textbox(label="Generated Text")
-
+        system_prompt = gr.Textbox(label="System Prompt", interactive=False, value="")
+        return document_type,name,date,detail1, detail2, detail3, detail4, output,system_prompt
     # Function to update details based on document type
     def update_details(document_type):
         if document_type not in SYSTEM_PROMPTS:  # Handle None or unexpected value
@@ -94,6 +95,6 @@ with gr.Blocks(    theme=gr.themes.Soft(),
         return detail1, detail2, detail3, detail4, system_prompt
     document_type.change(fn=update_details, inputs=[document_type], outputs=[detail1, detail2, detail3, detail4, system_prompt])
     generate_button.click(send_request_to_llm, inputs=[document_type, name, date, detail1, detail2, detail3, detail4], outputs=[system_prompt, output])
-    clear_button.click(clear_fields)
+    clear_button.click(fn=clear_fields,output=[document_type,name,date,detail1, detail2, detail3, detail4, output,system_prompt])
 
 demo.launch(auth=("woehner","woehner"),server_port=5000,share=True,server_name="0.0.0.0",favicon_path="./favicon.ico")
