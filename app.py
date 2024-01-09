@@ -68,14 +68,14 @@ with gr.Blocks(    theme=gr.themes.Soft(),
 
     # Function to update details based on document type
     def clear_fields():
-        document_type = gr.Dropdown(label="Select Document Type", choices=["Zeugnisse", "Abmahnung", "Jubiläum"])
-        name = gr.Textbox(label="Name")
-        date = gr.Textbox(label="Date (e.g., '01/01/2024')")
-        detail1 = gr.Textbox(label="Detail 1")
-        detail2 = gr.Textbox(label="Detail 2")
-        detail3 = gr.Textbox(label="Detail 3")
-        detail4 = gr.Textbox(label="Detail 4")
-        output = gr.Textbox(label="Generated Text")
+        document_type = gr.Dropdown(label="Select Document Type", choices=["Zeugnisse", "Abmahnung", "Jubiläum"],value="")
+        name = gr.Textbox(label="Name",value="")
+        date = gr.Textbox(label="Date (e.g., '01/01/2024')",value="")
+        detail1 = gr.Textbox(label="Detail 1",value="")
+        detail2 = gr.Textbox(label="Detail 2",value="")
+        detail3 = gr.Textbox(label="Detail 3",value="")
+        detail4 = gr.Textbox(label="Detail 4",value="")
+        output = gr.Textbox(label="Generated Text",value="")
         system_prompt = gr.Textbox(label="System Prompt", interactive=False, value="")
         return document_type,name,date,detail1, detail2, detail3, detail4, output,system_prompt
     # Function to update details based on document type
