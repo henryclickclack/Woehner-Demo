@@ -17,12 +17,14 @@ def send_request_to_llm(document_type, name, date, detail1, detail2, detail3, de
     elif document_type == "Abmahnung":
         prompt += f"Vorfall: {detail1}, Konsequenzen: {detail2}, Vorherige Verwarnungen: {detail3}. Zusätzliche Bemerkungen: {detail4}"
     elif document_type == "Jubiläum":
-        prompt += f"Dienstjahre: {detail1}, Beiträge: {detail2}, Persönliche Nachricht: {detail3}. Zusätzliche Bemerkungen: {detail4}"
+        prompt += f"Klinge enthusiastisch! Dienstjahre: {detail1}, Achievements: {detail2}, Persönliche Nachricht: {detail3}. Zusätzliche Bemerkungen: {detail4}"
     
     # Preparing data for the POST request
     data = {
     "model": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+    "temperature": 0.7,
     "messages": [
+        {"role": "system", "content": "Schreibe ein " + document_type + " f+r " + name + " am " + date + ". Sei so detailliert wie möglich. Antworte immer in vollständigen DEUTSCHEN Sätzen. Sei ausdrucksstark und vermeide Wiederholungen. "},
             {
                 "role":"user",
     "content": prompt,
@@ -49,10 +51,10 @@ with gr.Blocks(    theme=gr.themes.Soft(),
     with gr.Row():
         with gr.Column():
             with gr.Row():
-                document_type = gr.Dropdown(label="Select Document Type", choices=["Zeugnisse", "Abmahnung", "Jubiläum"])
+                document_type = gr.Dropdown(label="Dokumententyp wählen", choices=["Zeugnisse", "Abmahnung", "Jubiläum"])
             with gr.Row():
                 name = gr.Textbox(label="Name")
-                date = gr.Textbox(label="Date (e.g., '01/01/2024')")
+                date = gr.Textbox(label="Date (e.g., '05.02.2023')")
             with gr.Row():
                 detail1 = gr.Textbox(label="Detail 1")
                 detail2 = gr.Textbox(label="Detail 2")
@@ -68,9 +70,9 @@ with gr.Blocks(    theme=gr.themes.Soft(),
 
     # Function to update details based on document type
     def clear_fields():
-        document_type = gr.Dropdown(label="Select Document Type", choices=["Zeugnisse", "Abmahnung", "Jubiläum"],value="")
+        document_type = gr.Dropdown(label="Dokumententyp wählen", choices=["Zeugnisse", "Abmahnung", "Jubiläum"],value="")
         name = gr.Textbox(label="Name",value="")
-        date = gr.Textbox(label="Date (e.g., '01/01/2024')",value="")
+        date = gr.Textbox(label="Date (e.g., '05.02.2023')",value="")
         detail1 = gr.Textbox(label="Detail 1",value="")
         detail2 = gr.Textbox(label="Detail 2",value="")
         detail3 = gr.Textbox(label="Detail 3",value="")
